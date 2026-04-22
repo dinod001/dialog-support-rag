@@ -26,6 +26,7 @@ beautifulsoup4>=4.12.0            # HTML parsing and cleanup
 markdownify>=0.11.6               # HTML to Markdown conversion
 lxml>=5.1.0                       # Fast XML/HTML processing
 nest-asyncio>=1.5.0               # Enable nested asyncio loops in Jupyter
+pypdf>=5.0.0                      # PDF text extraction for ingestion
 
 # ========================================
 # Vector Store and Semantic Search
