@@ -26,6 +26,7 @@ from infrastructure.db.qdrant_client import (
     delete_collection,
     upsert_chunks,
     collection_info,
+    collection_exists,
 )
 
 from services.ingest_service.chunkers import parent_child_chunk
@@ -233,6 +234,14 @@ def run_ingest(
     embed_secs = time.time() - t0
     logger.info(f"   → Embedding done in {embed_secs:.1f}s")
 
+    if not embeddings or not embeddings[0]:
+        raise ValueError("No embeddings produced. Check embedding provider configuration.")
+
+    embedding_dim = len(embeddings[0])
+    if any(len(vec) != embedding_dim for vec in embeddings):
+        raise ValueError("Inconsistent embedding dimensions returned by provider.")
+    logger.info(f"   → Embedding dimension detected: {embedding_dim}")
+
     # ── 4. Create / recreate collection ──────────────────────
     if recreate:
         logger.info(f"\n🗑️  Recreating collection '{QDRANT_COLLECTION_NAME}'...")
@@ -241,7 +250,17 @@ def run_ingest(
         except Exception:
             pass  # collection may not exist yet
 
-    ensure_collection()
+    if not recreate and collection_exists():
+        info = collection_info()
+        existing_dim = int(info.get("vector_size", 0))
+        if existing_dim != embedding_dim:
+            raise ValueError(
+                "Embedding dimension mismatch with existing collection: "
+                f"embeddings={embedding_dim}, collection={existing_dim}. "
+                "Set recreate=True (or align embedding.vector_size) and run ingestion again."
+            )
+
+    ensure_collection(vector_size=embedding_dim)
 
     # ── 5. Upsert ────────────────────────────────────────────
     logger.info(f"\n⬆️  Upserting {len(chunks)} points into Qdrant...")
@@ -269,4 +288,4 @@ def run_ingest(
 
 
 if __name__ == "__main__":
-    run_ingest(source="pdf", source_path=Path("data"), strategy="parent_child", recreate=False)
+    run_ingest(source="pdf", source_path=Path("data"), strategy="parent_child", recreate=True)

@@ -6,3 +6,9 @@ openai:
   embedding:
     default: text-embedding-3-large
     small: text-embedding-3-small
+
+groq:
+  chat:
+    general: llama-3.1-8b-instant
+    strong: llama-3.3-70b-versatile
+    reason: deepseek-r1-distill-llama-70b

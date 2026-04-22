@@ -23,6 +23,7 @@ class Config:
         # --- ENV PROPERTIES ---
         self.env = {
             "OPENAI_API_KEY": os.getenv("OPENAI_API_KEY"),
+            "GROQ_API_KEY": os.getenv("GROQ_API_KEY"),
             "QDRANT_API_KEY": os.getenv("QDRANT_API_KEY"),
             "QDRANT_URL": os.getenv("QDRANT_URL"),
             "QDRANT_COLLECTION_NAME": os.getenv("QDRANT_COLLECTION_NAME"),
@@ -33,6 +34,7 @@ class Config:
 
         # Backward-compatible direct attributes.
         self.OPENAI_API_KEY = self.env["OPENAI_API_KEY"]
+        self.GROQ_API_KEY = self.env["GROQ_API_KEY"]
         self.QDRANT_API_KEY = self.env["QDRANT_API_KEY"]
         self.QDRANT_URL = self.env["QDRANT_URL"]
         self.QDRANT_COLLECTION_NAME = self.env["QDRANT_COLLECTION_NAME"]
