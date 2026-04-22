@@ -1,0 +1,81 @@
+# Agentic Memory Design — Dependencies
+# Python 3.10+
+# Install: pip install -r requirements.txt
+
+# ========================================
+# Core LLM and Embedding Services
+# ========================================
+openai>=1.12.0                    # OpenAI API for GPT models and embeddings
+anthropic>=0.18.0                 # Anthropic Claude models (optional)
+cohere>=4.47                      # Cohere for embeddings/reranking (optional)
+
+# ========================================
+# LangChain Ecosystem (Primary RAG Framework)
+# ========================================
+langchain>=0.1.0                  # Core LangChain framework
+langchain-core>=0.1.0             # Core abstractions (prompts, runnables)
+langchain-community>=0.0.20       # Community integrations (includes Chroma)
+langchain-openai>=0.0.5           # OpenAI LangChain integration (Chat + Embeddings)
+langchain-text-splitters>=0.2.0   # Text chunking utilities (semantic & fixed)
+
+# ========================================
+# Web Crawling and Content Extraction
+# ========================================
+playwright>=1.40.0                # Browser automation for JS-rendered sites
+beautifulsoup4>=4.12.0            # HTML parsing and cleanup
+markdownify>=0.11.6               # HTML to Markdown conversion
+lxml>=5.1.0                       # Fast XML/HTML processing
+nest-asyncio>=1.5.0               # Enable nested asyncio loops in Jupyter
+
+# ========================================
+# Vector Store and Semantic Search
+# ========================================
+qdrant-client>=1.9.0              # Qdrant Cloud — RAG knowledge-base vectors
+sentence-transformers>=2.3.1      # Optional: for local embeddings
+
+# ========================================
+# Text Processing and Tokenization
+# ========================================
+tiktoken>=0.5.2                   # OpenAI tokenizer for accurate token counting
+nltk>=3.8.1                       # NLP utilities for sentence segmentation
+spacy>=3.7.0                      # Advanced NLP for semantic chunking (optional)
+
+# ========================================
+# Configuration and Environment
+# ========================================
+python-dotenv>=1.0.0              # Load secrets from .env files
+pydantic>=2.5.0                   # Data validation and settings management
+pydantic-settings>=2.1.0          # Settings management with env support
+
+# ========================================
+# Utilities and Helper Libraries
+# ========================================
+tqdm>=4.66.0                      # Progress bars for long operations
+pandas>=2.2.0                     # Data manipulation and analysis
+numpy>=1.26.0                     # Numerical computing
+requests>=2.31.0                  # HTTP requests for API calls
+aiohttp>=3.9.0                    # Async HTTP for concurrent operations
+
+# ========================================
+# Memory & Reminders (Week 02) - Supabase
+# ========================================
+sqlalchemy>=2.0.0                # SQL ORM for Postgres metadata
+apscheduler>=3.10.0              # Task scheduling for reminders
+pytz>=2024.1                     # Timezone support for reminders
+python-dateutil>=2.8.0           # Date parsing utilities
+
+# ========================================
+# Observability & Tracing (LangFuse)
+# ========================================
+langfuse>=2.0.0                   # LangFuse tracing, cost tracking, prompt versioning
+loguru>=0.7.0                     # Structured logging (replaces stdlib logging)
+
+# ========================================
+# Development Tools (Optional)
+# ========================================
+black>=24.1.0                     # Code formatting
+flake8>=7.0.0                     # Linting
+mypy>=1.8.0                       # Static type checking
+pytest>=8.0.0                     # Testing framework
+pytest-asyncio>=0.23.0            # Async test support
+

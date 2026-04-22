@@ -1,0 +1,8 @@
+openai:
+  chat:
+    general: gpt-4o-mini
+    strong: gpt-4o
+    reason: o3-mini
+  embedding:
+    default: text-embedding-3-large
+    small: text-embedding-3-small

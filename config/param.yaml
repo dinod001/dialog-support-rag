@@ -1,0 +1,102 @@
+# ============================================================================
+# LLM Defaults
+# ============================================================================
+llm:
+  temperature: 0.0
+  max_tokens: 2000
+  streaming: false
+
+# ============================================================================
+# Embedding Settings
+# ============================================================================
+embedding:
+  # Model tier: "default" (3072d) or "small" (1536d)
+  tier: small
+  batch_size: 100
+  show_progress: false
+
+# ============================================================================
+# Chunking Configuration
+# ============================================================================
+chunking:
+  # Fixed-size chunking
+  fixed:
+    chunk_size: 800
+    chunk_overlap: 100
+  
+  # Semantic chunking
+  semantic:
+    max_chunk_size: 1000
+    min_chunk_size: 200
+  
+  # Sliding-window chunking
+  sliding:
+    window_size: 512
+    stride_size: 256
+  
+  # Parent-child chunking
+  parent_child:
+    parent_size: 1200
+    child_size: 250
+    child_overlap: 50
+  
+  # Late chunking
+  late:
+    base_size: 1000
+    split_size: 300
+    context_window: 150
+
+# ============================================================================
+# Retrieval Configuration
+# ============================================================================
+retrieval:
+  top_k: 4
+  similarity_threshold: 0.7
+
+# ============================================================================
+# CAG (Cache-Augmented Generation) — Qdrant Semantic Vector Cache
+# ============================================================================
+# Cache lives in a dedicated Qdrant collection (separate from RAG KB).
+# Lookups embed the query and do KNN-1 cosine search; a HIT is declared
+# when cosine_similarity ≥ similarity_threshold.
+# TTL is enforced at read time (entries older than cache_ttl are skipped).
+cag:
+  collection_name: cag_cache          # Qdrant collection for cached entries
+  similarity_threshold: 0.90          # 0.90-0.95 recommended for paraphrases
+  cache_ttl: 86400                    # TTL per entry in seconds (24h). 0 = no expiry
+  max_cache_size: 1000                # Informational limit
+
+# ============================================================================
+# CRAG (Corrective RAG)
+# ============================================================================
+crag:
+  confidence_threshold: 0.6
+  expanded_k: 8
+
+# ============================================================================
+# Paths (relative to project root)
+# ============================================================================
+paths:
+  data_dir: data
+  logs_dir: logs
+
+# ============================================================================
+# Logging
+# ============================================================================
+logging:
+  enabled: true
+  level: INFO  # DEBUG, INFO, WARNING, ERROR
+  log_tokens: true
+  log_latency: true
+
+# ============================================================================
+# Observability — LangFuse Tracing
+# ============================================================================
+observability:
+  enabled: true   # Set false to disable all tracing (zero overhead)
+
+# ============================================================================
+# Qdrant Cloud Configuration
+# ============================================================================
+qdrant:
+  collection_name: dialogue_memory
