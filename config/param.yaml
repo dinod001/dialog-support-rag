@@ -71,7 +71,7 @@ retrieval:
 # when cosine_similarity ≥ similarity_threshold.
 # TTL is enforced at read time (entries older than cache_ttl are skipped).
 cag:
-  collection_name: cag_cache          # Qdrant collection for cached entries
+  collection_name: dialog_cache          # Qdrant collection for cached entries
   similarity_threshold: 0.90          # 0.90-0.95 recommended for paraphrases
   cache_ttl: 86400                    # TTL per entry in seconds (24h). 0 = no expiry
   max_cache_size: 1000                # Informational limit
