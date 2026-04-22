@@ -18,7 +18,12 @@ from infrastructure.config import settings
 QDRANT_API_KEY = settings.QDRANT_API_KEY
 QDRANT_URL = settings.QDRANT_URL
 QDRANT_COLLECTION_NAME = settings.QDRANT_COLLECTION_NAME or "dialogue_memory"
-EMBEDDING_DIM = 1536 if settings.embedding.get("tier", "small") == "small" else 3072
+EMBEDDING_DIM = int(
+    settings.embedding.get(
+        "vector_size",
+        1536 if settings.embedding.get("tier", "small") == "small" else 3072,
+    )
+)
 
 logger = get_logger(__name__, "qdrant_client.log")
 # ---------------------------------------------------------------------------
