@@ -99,4 +99,4 @@ observability:
 # Qdrant Cloud Configuration
 # ============================================================================
 qdrant:
-  collection_name: dialogue_memory
+  collection_name: dialog_memory

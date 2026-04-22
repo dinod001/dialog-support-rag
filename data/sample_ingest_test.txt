@@ -1,0 +1,3 @@
+This is a sample text document for ingestion pipeline testing.
+It contains multiple lines so text loading can be validated.
+Dialog support RAG pipeline test content.
